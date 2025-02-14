@@ -1,29 +1,37 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: Build .NET MAUI App
+name: Build .NET MAUI App Android
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
-  build: # сборка
+  build:
 
-    runs-on: windows-latest    #Последн. верс.
+    runs-on: windows-latest
 
-    steps:   #шаги сборки
-    - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Keystore File
+      run: |
+        echo "${{ secrets.KEYSTORE_FILE }}" > myapp.keystore.asc
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD_GPG }}" --batch myapp.keystore.asc > myapp.keystore
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 9.0.x
-    - name: Install .NET MAUI              #Установка раб. нагрузки    для этой машины (она же в облаке!)
-      run: dotnet workload install maui 
-    - name: Restore dependencies           #востановлен зависимостей
-      run: dotnet restore                  #запуск коандой терминала востановления зависимостей 7:26
+    - name: Install .NET MAUI
+      run: dotnet workload install maui
+    - name: Restore dependencies
+      run: dotnet restore
     - name: Build
-      run: dotnet build MauiBlazorGitHSample.csprog -c Release --no-restore -f net9.0-android
+      run: dotnet build MauiBlazorGitHSample/MauiBlazorGitHSample.csproj -c Release -f net6.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: |
+          ./**/*.aab
+          ./**/*.apk
+
   
