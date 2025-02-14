@@ -1,7 +1,4 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Build .NET MAUI App
 
 on:
   push:
@@ -10,16 +7,17 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build: # сборка
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest    #Последн. верс.
 
-    steps:
+    steps:   #шаги сборки
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-
+    - name: Install .NET MAUI              #Установка раб. нагрузки    для этой машины (она же в облаке!)
+      run: dotnet workload install maui 
+    - name: Restore dependencies           #востановлен зависимостей
+      run: dotnet restore                  #запуск коандой терминала востановления зависимостей 7:26
