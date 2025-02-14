@@ -25,5 +25,5 @@ jobs:
     - name: Restore dependencies           #востановлен зависимостей
       run: dotnet restore                  #запуск коандой терминала востановления зависимостей 7:26
     - name: Build
-      run: dotnet build MauiBlazorGitHSample/MauiBlazorGitHSample.csprog -c Release --no-restore -f net9.0-android
+      run: dotnet build MauiBlazorGitHSample.csprog -c Release --no-restore -f net9.0-android
   
