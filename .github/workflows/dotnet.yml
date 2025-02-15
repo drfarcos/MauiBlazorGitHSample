@@ -25,4 +25,8 @@ jobs:
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-android --no-restore
     - name: Publish
       run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-android --output ${{ github.workspace }}/publish
-      
+    - name: Create APK
+      run: |
+        cd ${{ github.workspace }}/publish
+        zip -r MauiBlazorGitHSample.apk ./*
+
