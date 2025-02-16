@@ -9,7 +9,7 @@ on:
 jobs:
   build: # сборка
 
-    runs-on: windows-latest    #Последн. верс.
+    runs-on: windows-latest                #Последн. верс.
 
     steps:   #шаги сборки
     - uses: actions/checkout@v4
@@ -17,9 +17,22 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
-    - name: Install .NET MAUI              #Установка раб. нагрузки    для этой машины (она же в облаке!)
+    - name: Install .NET MAUI               #Установка раб. нагрузки    для этой машины (она же в облаке!)
       run: dotnet workload install maui 
+    - name: Restore dependencies            #востановлен зависимостей
+      run: dotnet restore                  
+    - name: Build                           #сборка проекта
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-android --no-restore
+    - name: Publish
+      run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-android --output ${{ github.workspace }}/publish
+   
+    - name: Create APK                      #шаг для создания .apk файла
+      run: |
+        cd ${{ github.workspace }}/publish
+        Compress-Archive -Path . -DestinationPath MauiBlazorGitHSample.zip -Force
 
-    - name: Restore dependencies           #востановление зависимостей
-      run: dotnet restore                  #запуск командой востановления зависимостей из терминала  7:Ж26
-     
+    - name: Upload APK                 #upl apk
+      uses: actions/upload-artifact@v4
+      with:
+       name: MauiBlazorGitHSample.apk
+       path: ${{ github.workspace }}/publish/MauiBlazorGitHSample.zip 
