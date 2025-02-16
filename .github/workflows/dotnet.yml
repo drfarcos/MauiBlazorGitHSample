@@ -32,7 +32,7 @@ jobs:
         Compress-Archive -Path . -DestinationPath MauiBlazorGitHSample.zip -Force
 
     - name: Upload APK                 #upl apk
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
        name: MauiBlazorGitHSample.apk
        path: ${{ github.workspace }}/publish/MauiBlazorGitHSample.zip 
