@@ -26,7 +26,10 @@ jobs:
     - name: Publish
       run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-android --output ${{ github.workspace }}/publish
    
-    - name: Create ZIP archive
-      run: tar -cvf MauiBlazorGitHSample.zip MauiBlazorGitHSample.apk
+    - name: Create APK
+      run: |
+        cd ${{ github.workspace }}/publish
+        Compress-Archive -Path . -DestinationPath MauiBlazorGitHSample.zip -Force
+
 
 
