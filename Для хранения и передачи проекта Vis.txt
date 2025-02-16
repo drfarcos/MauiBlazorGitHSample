@@ -34,7 +34,7 @@
  Внесение изменений в файл в проектa Visual Studio и Отправка изменений на GitHub.
 
 Добавление изменений, на Visual Studio. Указать путь к файлу в котором были изменения, напр. ".github\workflows\maui-ios.yml":
-1.git add .github\workflows\maui-ios.yml
+1. git add .github\workflows\maui-ios.yml
 
 Создание коммита. Файл в репозитории на GidHub будет подписан
  2. git commit -m "Ваше сообщение о коммите"
