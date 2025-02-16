@@ -19,8 +19,7 @@ jobs:
         dotnet-version: 9.0.x
     - name: Install .NET MAUI              #Установка раб. нагрузки    для этой машины (она же в облаке!)
       run: dotnet workload install maui 
+
     - name: Restore dependencies           #востановление зависимостей
-      run: dotnet restore                  #запуск командой востановления зависимостей из терминала  7:26
+      run: dotnet restore                  #запуск командой востановления зависимостей из терминала  7:Ж26
      
-   
-  
