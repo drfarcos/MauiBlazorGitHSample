@@ -61,14 +61,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include=".github\workflows\dotnet-ios.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>dotnet-ios.yml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include=".github\workflows\dotnet-ios.yml">
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>dotnet-ios.cs</LastGenOutput>
