@@ -61,6 +61,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Include=".github\workflows\dotnet-ios.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>dotnet-ios.yml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
       <None Include=".github\workflows\dotnet-ios.yml">
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>dotnet-ios.cs</LastGenOutput>
@@ -87,10 +95,11 @@
 
 
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-		<MtouchSdkVersion>16.1</MtouchSdkVersion>
-		<!-- Измените на версию SDK, поддерживаемую на GitHub Actions -->
+		<MtouchSdkVersion>17.5</MtouchSdkVersion>
+		<!-- Используйте текущую версию SDK, доступную на GitHub Actions -->
 		<MtouchLink>SdkOnly</MtouchLink>
 		<!-- Установите поведение компоновщика -->
 	</PropertyGroup>
+
 
 </Project>
