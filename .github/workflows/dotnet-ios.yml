@@ -23,6 +23,4 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
-    - name: Publish
-      run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --output ${{ github.workspace }}/publish
-
+   
