@@ -88,6 +88,8 @@
 		<!-- Используйте текущую версию SDK, доступную на GitHub Actions -->
 		 <MtouchLink>SdkOnly</MtouchLink>
 		<!--Установите поведение компоновщика -->
+		<CodesignKey>false</CodesignKey>
+		<!-- Отключите коды подписи -->
 	</PropertyGroup>
 
 
