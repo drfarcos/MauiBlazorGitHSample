@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
     - name: Publish
-      run: msbuild ${{ github.workspace }}/MauiBlazorGitHSample.csproj /p:Configuration=Release /p:Platform=iPhone /p:OutputPath=${{ github.workspace }}/publish /p:CodesignKey=false /p:CodesignProvision=false /p:BuildIpa=true /p:EnableOnDemandResources=false --no-codesign
+      run: msbuild ${{ github.workspace }}/MauiBlazorGitHSample.csproj /p:Configuration=Release /p:Platform=iPhone /p:OutputPath=${{ github.workspace }}/publish /p:CodesignKey= /p:CodesignProvision= /p:BuildIpa=true /p:EnableOnDemandResources=false
 
     - name: Create .app
       run: |
