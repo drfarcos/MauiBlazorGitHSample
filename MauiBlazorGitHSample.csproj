@@ -82,15 +82,13 @@
 		<AndroidSigningStorePass>123456</AndroidSigningStorePass>
 	</PropertyGroup>
 
-
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
 		<MtouchSdkVersion>17.5</MtouchSdkVersion>
-		<!-- Используйте текущую версию SDK, доступную на GitHub Actions -->
-		 <MtouchLink>SdkOnly</MtouchLink>
-		<!--Установите поведение компоновщика -->
+		<MtouchLink>SdkOnly</MtouchLink>
 		<CodesignKey>false</CodesignKey>
-		<!-- Отключите коды подписи -->
+		<CodesignProvision>false</CodesignProvision>
 	</PropertyGroup>
+
 
 
 </Project>
