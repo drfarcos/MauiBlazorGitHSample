@@ -84,10 +84,11 @@
 
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
 		<MtouchSdkVersion>17.5</MtouchSdkVersion>
+		<!-- Используйте текущую версию SDK, доступную на GitHub Actions -->
 		<MtouchLink>SdkOnly</MtouchLink>
-		<CodesignKey>false</CodesignKey>
-		<CodesignProvision>false</CodesignProvision>
+		<!-- Установите поведение компоновщика -->
 	</PropertyGroup>
+
 
 
 
