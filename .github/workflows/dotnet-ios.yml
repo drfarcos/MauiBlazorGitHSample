@@ -22,3 +22,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios 
