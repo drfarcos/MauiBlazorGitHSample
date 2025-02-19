@@ -1,4 +1,4 @@
-﻿name: Build .NET MAUI iOS App
+name: Build .NET MAUI iOS App
 
 on:
   push:
@@ -22,5 +22,3 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
-   
