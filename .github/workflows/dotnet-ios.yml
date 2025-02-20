@@ -24,10 +24,12 @@ jobs:
     - name: Build
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
       
-    - name: Archive .app
+    - name: Archive .app into ZIP
       run: |
-        mkdir -p ${{ github.workspace }}/publish
-        cp -R ${{ github.workspace }}/bin/Debug/net9.0-ios/iossimulator-x64/*.app ${{ github.workspace }}/publish/
+        mkdir -p ${{ github.workspace }}/publish/Payload
+        cp -R ${{ github.workspace }}/bin/Debug/net9.0-ios/iossimulator-*/MauiBlazorGitHSample.app ${{ github.workspace }}/publish/Payload/
+        cd ${{ github.workspace }}/publish
+        zip -r MauiBlazorGitHSample.app.zip Payload/
 
     - name: Upload .app as artifact
       uses: actions/upload-artifact@v4
