@@ -7,23 +7,34 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
-    runs-on: macos-latest  # Используем macOS, так как требуется для сборки iOS-приложений
+  build-ios-simulator:
+    runs-on: macos-latest  # Используем macOS, так как требуется для сборки iOS
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
+
     - name: Install .NET MAUI
-      run: dotnet workload install maui 
+      run: dotnet workload install maui
+
     - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
-      
-    - name: Publish .app for iOS         #Базовая команда (без подписи) для iOS-симулятора
-      run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
+      run: dotnet restore --runtime iossimulator-x64
+
+    - name: Publish .app for iOS Simulator
+      run: dotnet publish ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --runtime iossimulator-x64 --no-restore
+
+    - name: Archive .app
+      run: |
+        mkdir -p ${{ github.workspace }}/publish
+        cp -R ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/*.app ${{ github.workspace }}/publish/
+
+    - name: Upload .app as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MauiBlazorGitHSample.app
+        path: ${{ github.workspace }}/publish/
 
