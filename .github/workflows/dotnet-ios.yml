@@ -23,3 +23,14 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
+      
+    - name: Archive .app
+      run: |
+        mkdir -p ${{ github.workspace }}/publish
+        cp -R ${{ github.workspace }}/bin/Debug/net9.0-ios/iossimulator-x64/*.app ${{ github.workspace }}/publish/
+
+    - name: Upload .app as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MauiBlazorGitHSample.app
+        path: ${{ github.workspace }}/publish/
