@@ -21,12 +21,12 @@ jobs:
       run: dotnet workload install maui 
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
+    - name: Build for Simulator
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
     - name: Create .app
       run: |
-        cd ${{ github.workspace }}/bin/Release/net9.0-ios/ios-arm64
+        cd ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64
         mkdir -p Payload
         mv *.app Payload/
         zip -r MauiBlazorGitHSample.app.zip Payload/
@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: MauiBlazorGitHSample.app.zip
-        path: ${{ github.workspace }}/bin/Release/net9.0-ios/ios-arm64/MauiBlazorGitHSample.app.zip
+        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/MauiBlazorGitHSample.app.zip
