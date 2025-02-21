@@ -13,6 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Check macOS and Xcode version
+      run: |
+        sw_vers  # Вывод информации о версии macOS
+        xcodebuild -version  # Вывод информации о версии Xcode
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
