@@ -42,10 +42,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<!--добавил в файл проекта поддержку iossimulator и т.д..
-	<PropertyGroup>
-		<RuntimeIdentifiers>ios-arm64;iossimulator-x64;iossimulator-arm64</RuntimeIdentifiers>
-	</PropertyGroup>-->
+	<!--добавил в файл проекта поддержку iossimulator и т.д..-->
+	<propertygroup>
+		<runtimeidentifiers>ios-arm64;iossimulator-x64;iossimulator-arm64</runtimeidentifiers>
+	</propertygroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
