@@ -42,3 +42,16 @@
 Отправка изменений на GitHub:
  3. git push origin main
 
+ ---------------------------------------------------
+
+
+ 	<!--добавил в файл проекта поддержку iossimulator и т.д..-->
+	<propertygroup>
+		<runtimeidentifiers>ios-arm64;iossimulator-x64;iossimulator-arm64</runtimeidentifiers>
+	</propertygroup>
+
+ 	<!-- для  Xcode с устаревшей  SDK версией-->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
+		<MtouchSdkVersion>17.5</MtouchSdkVersion>
+		<MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
