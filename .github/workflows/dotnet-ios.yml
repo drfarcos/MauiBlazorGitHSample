@@ -31,9 +31,8 @@ jobs:
     - name: Create .app
       run: |
         cd ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64
-        mkdir -p Payload
-        mv *.app Payload/
-        zip -r MauiBlazorGitHSample.app.zip Payload/
+        mv *.app MauiBlazorGitHSample.app  # Переименуйте .app файл
+        zip -r MauiBlazorGitHSample.app.zip MauiBlazorGitHSample.app  # Архивируем .app файл
 
     - name: Upload .app
       uses: actions/upload-artifact@v4
