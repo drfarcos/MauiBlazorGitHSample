@@ -28,14 +28,15 @@ jobs:
     - name: Build for Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
-
     - name: Create .app
       run: |
         cd ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64
-        zip -r MauiBlazorGitHSample.zip MauiBlazorGitHSample.app  # Архивируем .app файл в файл .zip
+        mv MauiBlazorGitHSample.app Payload/
+        cd Payload
+        xar -c -f ../MauiBlazorGitHSample.xip MauiBlazorGitHSample.app
 
     - name: Upload .app
       uses: actions/upload-artifact@v4
       with:
-        name: MauiBlazorGitHSample.zip
-        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/MauiBlazorGitHSample.zip
+        name: MauiBlazorGitHSample.xip
+        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/MauiBlazorGitHSample.xip
