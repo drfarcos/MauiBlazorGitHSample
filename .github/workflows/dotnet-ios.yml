@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Check macOS and Xcode version
       run: |
-        sw_vers  # Вывод информации о версии macOS
+        sw_vers              # Вывод информации о версии macOS
         xcodebuild -version  # Вывод информации о версии Xcode
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -29,15 +29,9 @@ jobs:
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
 
-    - name: Create .app
-      run: |
-        cd ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64
-        zip -r MauiBlazorGitHSample.zip MauiBlazorGitHSample.app  # Архивируем .app файл в файл .zip
-
-    - name: Upload .app
-      uses: actions/upload-artifact@v4
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4 
       with:
-        name: MauiBlazorGitHSample.zip
-        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/MauiBlazorGitHSample.zip
-
-
+        path: |
+          ./**/*.app
+ 
