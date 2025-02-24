@@ -33,6 +33,6 @@ jobs:
       uses: actions/upload-artifact@v4 
       with:
         name: MauiBlazorGitHSample.app
-        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/MauiBlazorGitHSample.app
+        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/*.app
             
  
