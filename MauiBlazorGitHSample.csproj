@@ -92,7 +92,7 @@
 
 <!---->
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-		<MtouchSdkVersion>17.0</MtouchSdkVersion>
+		<MtouchSdkVersion>17.5</MtouchSdkVersion>
 		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>	
 
