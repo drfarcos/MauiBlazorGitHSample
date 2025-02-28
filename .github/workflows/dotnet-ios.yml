@@ -25,10 +25,10 @@ jobs:
       run: xcrun simctl list runtimes
 
     - name: Restore NuGet Packages
-      run: dotnet restore MauiBlazorGitHSample/MauiBlazorGitHSample.csproj
+      run: dotnet restore ${{ github.workspace }}/MauiBlazorGitHSample.csproj
 
     - name: Clean Project
-      run: dotnet clean MauiBlazorGitHSample/MauiBlazorGitHSample.csproj
+      run: dotnet clean ${{ github.workspace }}/MauiBlazorGitHSample.csproj
 
     - name: Build iOS Project
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
