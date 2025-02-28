@@ -34,7 +34,7 @@ jobs:
 
     - name: Build iOS Project
       run: |
-        dotnet build MauiAppTest.csproj -c Release -f net9.0-ios \
+        dotnet build MauiBlazorGitHSample.csproj -c Release -f net9.0-ios \
           /p:RuntimeIdentifier=iossimulator-x64 \
           /p:MtouchSdkVersion=18.2 \
           /p:MtouchLink=SdkOnly
@@ -42,6 +42,6 @@ jobs:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: MauiAppTest.app
+        name: MauiBlazorGitHSample.app
         path: |
           bin/Release/net9.0-ios/iossimulator-x64/*.app
