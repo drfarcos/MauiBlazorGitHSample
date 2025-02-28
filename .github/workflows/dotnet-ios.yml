@@ -21,22 +21,19 @@ jobs:
     - name: Install .NET MAUI Workloads
       run: dotnet workload install maui
 
-    - name: Set up Xcode 16.2
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.2'
-
     - name: Verify Available Simulators
       run: xcrun simctl list runtimes
 
     - name: Restore NuGet Packages
-      run: dotnet restore
+      run: dotnet restore MauiBlazorGitHSample/MauiBlazorGitHSample.csproj
+
+    - name: Clean Project
+      run: dotnet clean MauiBlazorGitHSample/MauiBlazorGitHSample.csproj
 
     - name: Build iOS Project
       run: |
-        dotnet build MauiBlazorGitHSample.csproj -c Release -f net9.0-ios \
+        dotnet build MauiBlazorGitHSample/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios \
           /p:RuntimeIdentifier=iossimulator-x64 \
-          /p:MtouchSdkVersion=18.2 \
           /p:MtouchLink=SdkOnly
 
     - name: Upload Build Artifacts
@@ -44,4 +41,4 @@ jobs:
       with:
         name: MauiBlazorGitHSample.app
         path: |
-          bin/Release/net9.0-ios/iossimulator-x64/*.app
+          MauiBlazorGitHSample/bin/Release/net9.0-ios/iossimulator-x64/*.app
