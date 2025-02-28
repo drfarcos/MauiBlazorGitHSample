@@ -17,6 +17,7 @@ jobs:
       run: |
         sw_vers              # Вывод информации о версии macOS
         xcodebuild -version  # Вывод информации о версии Xcode
+        xcodebuild -showsdks # Вывод информации о версии SDK
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
