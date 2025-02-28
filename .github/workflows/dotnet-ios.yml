@@ -31,14 +31,11 @@ jobs:
       run: dotnet clean MauiBlazorGitHSample/MauiBlazorGitHSample.csproj
 
     - name: Build iOS Project
-      run: |
-        dotnet build MauiBlazorGitHSample/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios \
-          /p:RuntimeIdentifier=iossimulator-x64 \
-          /p:MtouchLink=SdkOnly
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
+
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: MauiBlazorGitHSample.app
-        path: |
-          MauiBlazorGitHSample/bin/Release/net9.0-ios/iossimulator-x64/*.app
+        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/*.app
