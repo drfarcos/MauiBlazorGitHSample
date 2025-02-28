@@ -21,7 +21,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x --no-restore
+        dotnet-version: 9.0.x
     - name: Install .NET MAUI
       run: dotnet workload install maui 
     - name: Restore dependencies
