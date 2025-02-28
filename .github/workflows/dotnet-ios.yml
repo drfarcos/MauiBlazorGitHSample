@@ -13,44 +13,35 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Check macOS and Xcode version
-      run: |
-        sw_vers
-        xcodebuild -version
-        xcrun simctl list runtimes
+    - name: Set up .NET 9.0 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
 
-    - name: Set up Xcode
+    - name: Install .NET MAUI Workloads
+      run: dotnet workload install maui
+
+    - name: Set up Xcode 16.2
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: '16.2'
 
-    - name: Cache NuGet packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/MauiBlazorGitHSample.csproj') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+    - name: Verify Available Simulators
+      run: xcrun simctl list runtimes
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x
-
-    - name: Install .NET MAUI and additional SDKs
-      run: |
-        dotnet workload install maui
-        dotnet workload install maui-android
-        dotnet workload install maui-maccatalyst
-
-    - name: Restore dependencies
+    - name: Restore NuGet Packages
       run: dotnet restore
 
-    - name: Build for Simulator
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
+    - name: Build iOS Project
+      run: |
+        dotnet build MauiAppTest.csproj -c Release -f net9.0-ios \
+          /p:RuntimeIdentifier=iossimulator-x64 \
+          /p:MtouchSdkVersion=18.2 \
+          /p:MtouchLink=SdkOnly
 
-    - name: Upload a Build Artifact
+    - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: MauiBlazorGitHSample.app
-        path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/*.app
+        name: MauiAppTest.app
+        path: |
+          bin/Release/net9.0-ios/iossimulator-x64/*.app
