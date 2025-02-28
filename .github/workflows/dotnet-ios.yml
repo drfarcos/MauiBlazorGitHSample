@@ -17,6 +17,7 @@ jobs:
       run: |
         sw_vers              # Вывод информации о версии macOS
         xcodebuild -version  # Вывод информации о версии Xcode
+        xcrun simctl list runtimes
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -25,10 +26,6 @@ jobs:
       run: dotnet workload install maui 
     - name: Restore dependencies
       run: dotnet restore
-    - name: Set up Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.2'
     - name: Build for Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
