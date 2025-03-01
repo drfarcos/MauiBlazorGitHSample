@@ -31,14 +31,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore 
 
-    - name: Build for iOS arm64 Simulator
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-arm64 --no-restore
 
     - name: Build for iOS x64 Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
-    - name: Build for iOS arm64 Device
-      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=ios-arm64 --no-restore
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
