@@ -2,39 +2,45 @@ name: Build .NET MAUI iOS App
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-    runs-on: macos-latest
+
+    runs-on: macos-latest  # Используем macOS для сборки iOS приложений
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up .NET 9.0 SDK
+    - name: Check macOS and Xcode version
+      run: |
+        sw_vers              # Версия macOS
+        xcodebuild -version  # Версия Xcode
+        xcrun simctl list runtimes
+
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
+        dotnet-version: 9.0.x
 
-    - name: Install .NET MAUI Workloads
-      run: dotnet workload install maui
+    - name: Install .NET MAUI
+      run: dotnet workload install maui 
 
-    - name: Verify Available Simulators
-      run: xcrun simctl list runtimes
+    - name: Restore dependencies
+      run: dotnet restore 
 
-    - name: Restore NuGet Packages
-      run: dotnet restore ${{ github.workspace }}/MauiBlazorGitHSample.csproj
+    - name: Build for iOS arm64 Simulator
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-arm64 --no-restore
 
-    - name: Clean Project
-      run: dotnet clean ${{ github.workspace }}/MauiBlazorGitHSample.csproj
-
-    - name: Build iOS Project
+    - name: Build for iOS x64 Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
+    - name: Build for iOS arm64 Device
+      run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=ios-arm64 --no-restore
 
-    - name: Upload Build Artifacts
+    - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: MauiBlazorGitHSample.app
