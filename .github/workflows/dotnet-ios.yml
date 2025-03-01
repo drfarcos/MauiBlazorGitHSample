@@ -27,6 +27,9 @@ jobs:
 
     - name: Install .NET MAUI
       run: dotnet workload install maui 
+  
+    - name: Check installed SDKs
+      run: dotnet --list-sdks
 
     - name: Restore dependencies
       run: dotnet restore 
