@@ -31,6 +31,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore 
 
+    - name: Clean project
+      run: dotnet clean
 
     - name: Build for iOS x64 Simulato #RuntimeIdentifier при запуске команды dotnet build в  yaml файле.
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios --no-restore
