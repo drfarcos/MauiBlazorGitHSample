@@ -32,7 +32,7 @@ jobs:
       run: dotnet restore 
 
 
-    - name: Build for iOS x64 Simulator
+    - name: Build for iOS x64 Simulato
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
 
