@@ -2,43 +2,44 @@ name: Build .NET MAUI iOS App
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master"]  # Запускает workflow при каждом push в ветку "master"
   pull_request:
-    branches: ["master"]
+    branches: ["master"]  # Запускает workflow при каждом pull request в ветку "master"
 
 jobs:
   build:
 
-    runs-on: macos-latest  # Используем macOS для сборки iOS приложений
+    runs-on: macos-latest  # Определяет, что для выполнения работы используется последняя версия macOS
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4  # Шаг для клонирования репозитория и проверки кода
+
 
     - name: Check macOS and Xcode version
       run: |
         sw_vers              # Версия macOS
         xcodebuild -version  # Версия Xcode
-        xcrun simctl list runtimes
+        xcrun simctl list runtimes  # Выводит список доступных симуляторов
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 9.0.x  # Устанавливает версию .NET SDK 9.0.x
 
     - name: Install .NET MAUI
-      run: dotnet workload install maui 
+      run: dotnet workload install maui   # Устанавливает .NET MAUI workload
 
     - name: Restore dependencies
-      run: dotnet restore 
+      run: dotnet restore  # Восстанавливает зависимости проекта
 
     - name: Clean project
-      run: dotnet clean
+      run: dotnet clean  # Очищает проект, удаляя все ранее скомпилированные артефакты
 
-    - name: Build for iOS x64 Simulato 
+    - name: Build for iOS x64 Simulator #Сборка проекта для iOS x64 Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore
 
-    - name: Upload a Build Artifact
+    - name: Upload a Build Artifact  #Загрузить сборку в Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: MauiBlazorGitHSample.app
+        name: MauiBlazorGitHSample.app # имя zip пакета, который далее можно спользовать для запуска прилож. в симуляторе
         path: ${{ github.workspace }}/bin/Release/net9.0-ios/iossimulator-x64/*.app
