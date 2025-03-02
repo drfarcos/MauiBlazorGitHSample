@@ -33,10 +33,10 @@ jobs:
     - name: Clean project
       run: dotnet clean  # Очищает проект, удаляя все ранее скомпилированные артефакты
 
-    - name: Build for iOS x64 Simulator
+    - name: Build for iOS x64 Simulator #vypolniaetsia sborka proekta dlia Simulator
       run: dotnet build ${{ github.workspace }}/MauiBlazorGitHSample.csproj -c Release -f net9.0-ios /p:RuntimeIdentifier=iossimulator-x64 --no-restore  # Собирает проект для iOS симулятора x64
 
-    - name: Upload a Build Artifact
+    - name: Upload a Build Artifact #загружает сборку проекта и создается пакет zip (.APP-файл)
       uses: actions/upload-artifact@v4
       with:
         name: MauiBlazorGitHSample.app  # Имя артефакта
