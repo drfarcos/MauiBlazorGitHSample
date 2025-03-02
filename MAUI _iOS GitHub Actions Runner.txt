@@ -1,0 +1,39 @@
+
+Настроить проект .NET MAUI для тестирования на iOS с помощью GitHub Actions Runner
+Эти рекомендации были учтены при создании этого примера , адрес проекта в рипозитарии -> https://github.com/drfarcos/MauiBlazorGitHSample
+
+
+1.Создать проект .NET MAUI:
+  Откройте Visual Studio и выберите шаблон проекта .NET MAUI. Создайте новый проект.
+  В файле проекта добавить после "</PropertyGroup>" (если .NET MAUI net9.0):
+  
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
+		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
+		<MtouchSdkVersion>17.5</MtouchSdkVersion>
+		<MtouchLink>SdkOnly</MtouchLink>
+	</PropertyGroup>
+  
+2.Создать учетную запись на GitHub:
+  Если нет учетной записи на GitHub, зарегистрируйтесь на GitHub (https://github.com/?form=MG0AV3).
+
+3.Подключить Visual Studio к GitHub:
+  В Visual Studio перейдите в меню "Git" и выберите "Подключиться к репозиторию". Следуйте инструкциям для авторизации и подключения.
+
+4.Создать конфигурацию YAML в проекте .NET MAUI:
+  В корне проекта создайте вложенные каталоги .github/workflows.
+  В каталоге workflows создайте файл конфигурации YAML (например, ci.yml), чтобы настроить связь с GitHub Actions и виртуальной машиной MacOS.
+
+5. Создание репозитория и настройка GitHub Actions Runner:
+
+   а. Создание репозитория на GitHub:
+      В Visual Studio через меню "Git" выберите "Создать репозиторий на GitHub". Следуйте инструкциям для завершения создания репозитория.
+   b. Коммит изменений и отправка:
+      В проекте в Visual Studio перейдите в меню "Git" -> "Фиксация или скрытие". Закоммитьте изменения и выберите "Зафиксировать всё и отправить".
+   c. Запуск GitHub Actions:
+      Откройте ваш репозиторий на GitHub в браузере. Перейдите на вкладку "Actions" и проверьте статус выполнения сборки.
+   d. Получение файла .app:
+      В разделе "Actions" после успешной сборки в разделе "Artifacts" появится файл с расширением .app.zip. Загрузите его для использования в симуляторе.
+
