@@ -2,7 +2,7 @@ name: Build .NET MAUI iOS App
 
 on:
   push:
-    branches: ["master"]  # «апускает workflow при каждом push в ветку "master"
+    branches: ["master"]  # запускает workflow при каждом в ветку "master"
   pull_request:
     branches: ["master"]  # «апускает workflow при каждом pull request в ветку "master"
 
