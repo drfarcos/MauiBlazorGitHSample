@@ -48,9 +48,9 @@
 		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
 	</PropertyGroup>
 
-<!--добавить для проекта  net9.0-ios: указать  версию iOS  и "SdkOnl" чтобы при компиляции очистить сборку от лишненего-->
+	<!--добавить для проекта  net9.0-ios: указать  версию iOS  и "SdkOnl" чтобы при компиляции очистить сборку от лишненего-->
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-		<MtouchSdkVersion>17.5</MtouchSdkVersion>
+		<!--<MtouchSdkVersion>17.0</MtouchSdkVersion>-->
 		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 

@@ -5,7 +5,7 @@
 
 1.Создать проект .NET MAUI:
   Откройте Visual Studio и выберите шаблон проекта .NET MAUI. Создайте новый проект.
-  В файле проекта добавить после "</PropertyGroup>" (если .NET MAUI net9.0):
+  В файле проекта после "</PropertyGroup>"  (учитывая версию .NET MAUI и SDK iOS) добавить 2-а фрагмента:
   
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
 		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
