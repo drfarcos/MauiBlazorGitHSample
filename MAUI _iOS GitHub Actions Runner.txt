@@ -1,18 +1,19 @@
 
-Настроить проект .NET MAUI для тестирования на iOS с помощью GitHub Actions Runner
-Эти рекомендации были учтены при создании этого примера , адрес проекта в рипозитарии -> https://github.com/drfarcos/MauiBlazorGitHSample
+НАЗНАЧЕНИЕ
+
+Тестирования MAUI iOS-платформы на GitHub-е, с помощью  сервиса "GitHub Actions Runner" и виртуального MacOS.
+В результате, в рипозитарии GitHub будет получен '.app' исполняемый пакет для iOS-симулятора  ("iossimulator-x64").
+
+Адрес проекта в рипозитарии -> https://github.com/drfarcos/MauiBlazorGitHSample
 
 
 1.Создать проект .NET MAUI:
-  Откройте Visual Studio и выберите шаблон проекта .NET MAUI. Создайте новый проект.
-  В файле проекта после "</PropertyGroup>"  (учитывая версию .NET MAUI и SDK iOS) добавить 2-а фрагмента:
+  В файле проекта после "</PropertyGroup>" добавить фрагмент, который необходим, чтобы избежать ошибок, связанных с линковщиком и несовместимостью с новыми версиями API.
+  Он удаляет неиспользуемый код из библиотек SDK, это снижает риск возникновения ошибок.
+  И указывает что будет использовван симулятор типа "iossimulator-x64":
   
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios' AND ( '$(Configuration)' == 'Release' OR '$(Configuration)' == 'Debug' )">
 		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-		<MtouchSdkVersion>17.5</MtouchSdkVersion>
 		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
   
