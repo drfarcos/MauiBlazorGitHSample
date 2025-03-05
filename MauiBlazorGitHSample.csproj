@@ -42,7 +42,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<!--добавить для проекта net9.0-ios поддержку симулятора "iossimulator-x64" и т.д..-->
+	<!-- Добавлено для тестирования iOS-платформы..-->
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios' AND ( '$(Configuration)' == 'Release' OR '$(Configuration)' == 'Debug' )">
 		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
