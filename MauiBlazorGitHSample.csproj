@@ -44,15 +44,11 @@
 
 	<!--добавить для проекта net9.0-ios поддержку симулятора "iossimulator-x64" и т.д..-->
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-ios' AND ( '$(Configuration)' == 'Release' OR '$(Configuration)' == 'Debug' )">
 		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
-	</PropertyGroup>		
-
-
-<!--добавить для проекта  net9.0-ios: указать  версию iOS  и "SdkOnl" чтобы при компиляции очистить сборку от лишненего-->
-	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
+		<!--обязателен в текущей конфигурации, чтобы избежать ошибок, связанных с линковщиком и несовместимостью с новыми версиями API. Также удаляет только неиспользуемый код из библиотек SDK, это снижает риск возникновения ошибок -->
 		<MtouchLink>SdkOnly</MtouchLink>
-	</PropertyGroup>		
+	</PropertyGroup>
 
 
 
