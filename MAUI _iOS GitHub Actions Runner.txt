@@ -16,9 +16,9 @@ Visual Studio через меню "Git > Фиксация или скрытие"
 		<MtouchLink>SdkOnly</MtouchLink>
 	</PropertyGroup>
 
-   Он содержит инструкции:"<RuntimeIdentifiers>iossimulator-x64" - которая указывает,что будет использован симулятор типа "iossimulator-x64
-   и "<MtouchLink>SdkOnly" -, чтобы избежать ошибок, связанных с линковщиком и несовместимостью с новыми версиями API
-   так же удаляется неиспользуемый код из библиотек SDK.             
+  - "<RuntimeIdentifiers>iossimulator-x64" - указывает,что будет использован симулятор типа "iossimulator-x64 .
+  - "<MtouchLink>SdkOnly" -, чтобы избежать ошибок, связанных с линковщиком и несовместимостью с новыми версиями API
+     и удаляется неиспользуемый код из библиотек SDK.             
      
 2. Создать учетную запись на GitHub:  
    Если нет учетной записи на GitHub, зарегистрируйтесь на GitHub (https://github.com/?form=MG0AV3).
