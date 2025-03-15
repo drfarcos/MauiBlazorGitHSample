@@ -1,5 +1,7 @@
 name: Build .NET MAUI App
 
+# Для Android
+
 on:
   push:
     branches: [ "master" ]
